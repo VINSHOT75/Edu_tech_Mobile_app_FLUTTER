@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "463591831109",
+    "firebase_url": "https://vinshot.firebaseio.com",
+    "project_id": "vinshot",
+    "storage_bucket": "vinshot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463591831109:android:840c0203b812fd3b33552c",
+        "android_client_info": {
+          "package_name": "vinayak.testing3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463591831109-m3qj2tobjjscp6re7mr1jtacphh2jpqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6U0EvQZAONDAsT0mTEYhZoUNg0OMiFRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463591831109-m3qj2tobjjscp6re7mr1jtacphh2jpqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
