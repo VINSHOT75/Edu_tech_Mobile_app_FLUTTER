@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:testing3/Teacherinfo.dart';
-
+import 'package:testing3/Subjectinfo.dart';
+import 'package:testing3/studentscreen.dart';
+Color mainColor = Color(0xff305049);
+Color secColor = Color(0xffD0BEA5);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -15,19 +17,22 @@ class MySubjects extends StatefulWidget {
 }
 
 class _MySubjectsState extends State<MySubjects> {
+  Color mainColor = Color(0xff305049);
+  Color secColor = Color(0xffD0BEA5);
+  Color terColor = Colors.white70;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
+      //backgroundColor: terColor,
         appBar: AppBar(
           automaticallyImplyLeading: true,
             leading: IconButton (icon:Icon(Icons.arrow_back_ios
             ),
             onPressed:() {
-              Navigator.of(context).pop(true);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> Vinayak()));
               },
             ),
-          backgroundColor: Colors.deepOrangeAccent,
+          backgroundColor: mainColor,
              title: Center(child: Text("My Subjects            ")),
         ),
         body: StreamBuilder(
@@ -40,43 +45,134 @@ class _MySubjectsState extends State<MySubjects> {
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Card(
-                    child: ListTile(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> OS()));
+                            //Navigator.pop(context);
+                          },
+                          title: Center(
+                            child: Text(
+                                snapshot.data.documents[0]['OS'],
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> CN()));
+                          },
+                          title: Center(
+                            child: Text(
+                                snapshot.data.documents[0]['CN'],
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> TOC()));
+                          },
+                          title: Center(
+                            child: Text(
+                                snapshot.data.documents[0]['TOC'],
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> OOAD()));
+                          },
+                          title: Center(
+                            child: Text(
+                                snapshot.data.documents[0]['ooad'],
+                            style: TextStyle(fontSize: 30),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> JAVAP()));
+                          },
+                          title: Center(
+                            child: Text(
+                                snapshot.data.documents[0]['JP'],
+                               style: TextStyle(fontSize: 30),
+                            ),
+                          ),
+
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4,right:4,top: 4,bottom: 12),
+                    child: Container(
+                      height: 125,
+                      decoration: BoxDecoration(
+                        color: secColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
                         onTap: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> OS()));
-                          //Navigator.pop(context);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> AI()));
                         },
-                        title: Text(
-                            snapshot.data.documents[0]['OS']
-                        )
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                        onTap: () {},
-                        title: Text(
-                            snapshot.data.documents[0]['CN'])
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                        onTap: () {},
-                        title: Text(
-                            snapshot.data.documents[0]['TOC'])
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                        onTap: () {},
-                        title: Text(
-                            snapshot.data.documents[0]['ooad'])
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                        onTap: () {},
-                        title: Text(
-                            snapshot.data.documents[0]['JP'])
+                        title: Center(
+                          child: Text(
+                            snapshot.data.documents[0]['AI'],
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        ),
+
+                      ),
                     ),
                   ),
                 ],
@@ -84,7 +180,7 @@ class _MySubjectsState extends State<MySubjects> {
             );
           },
         ),
-      ),
-    );
+      );
+
   }
 }

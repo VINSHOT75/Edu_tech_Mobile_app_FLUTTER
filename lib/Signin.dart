@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:testing3/MySubjects.dart';
 import 'ForgotScreen.dart';
 import 'studentscreen.dart';
 
@@ -11,9 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Color mainColor = Color(0xffEB8921);
-
-
+  Color mainColor = Color(0xff305049);
+  Color secColor = Color(0xffD0BEA5);
+  //Color terColor = Color(0xfff25e38);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _email, _password;
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      //backgroundColor: secColor,
       appBar:  AppBar(
           backgroundColor: mainColor,
           //shadowColor: Colors.teal,
@@ -39,49 +41,53 @@ class _LoginPageState extends State<LoginPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    TextFormField(
-                      cursorColor: Colors.deepOrangeAccent,
-                      validator: (input){
-                        if(input.isEmpty){
-                          return 'Provide an email';
-                        }
-                      },
-                      onSaved: (input) => _email = input,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                        fillColor: Colors.green,
-                        hintStyle: TextStyle(
-                        color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.only(top:8.0),
+                      child: TextFormField(
+                        cursorColor: secColor,
+                        validator: (input){
+                          if(input.isEmpty){
+                            return 'Provide an email';
+                          }
+                        },
+                        onSaved: (input) => _email = input,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(
+                          color: mainColor,
                         ),
-                          focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                      color: Colors.deepOrangeAccent,
+                          fillColor: mainColor,
+                          hintStyle: TextStyle(
+                          //color: Colors.white,
+                          ),
+                            focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                        color: mainColor,
+                        ),
                       ),
-                    ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: TextFormField(
-                          cursorColor: Colors.red,
+                          cursorColor: mainColor,
                           //keyboardType: TextInputType.phone,
                         validator: (input) {
                           if(input.length < 6){
                             return 'Longer password please';
                           }
+
                       },
                         onSaved: (input) => _password = input,
                         decoration: InputDecoration(
                             labelText: 'Passsword',
                           labelStyle: TextStyle(
-                            color: Colors.black,
+                            color: mainColor,
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.deepOrangeAccent,
+                              color: mainColor,
                             ),
                           ),
                         ),
@@ -95,9 +101,14 @@ class _LoginPageState extends State<LoginPage> {
                           onTap:(){
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> ForgotScreen()));
                           },
-                          child: Text('forgot password',
+                          child: Text('Forgot Password',
+                          style: TextStyle(
+                            color: mainColor
+                          ),
                           textAlign: TextAlign.right,),
-                        ),),),
+                        ),
+                    ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top :20.0),
 
@@ -105,10 +116,18 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                         minWidth: 500,
                         child: RaisedButton(
-                          color: Colors.blueGrey[100],
+                          color: secColor,
                           elevation: 5,
-                          onPressed:signIn,
-                          child: Text('Sign in'),
+                          onPressed:(){
+                            signIn();
+                            //Navigator.pop(context);
+                          },
+                          child: Text(
+                              'Sign in',
+                            style:TextStyle(
+                                color: mainColor,
+                                height: 1, fontSize: 19.0),
+                          ),
                         ),
                       ),
                     ),
@@ -119,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: 950,
                         decoration: BoxDecoration(
                         image: DecorationImage(
-                        image: AssetImage("images/Signin.gif"),
+                        image: AssetImage("images/signinw.gif"),
                         fit: BoxFit.fill,
                       )
                         )
@@ -140,10 +159,15 @@ class _LoginPageState extends State<LoginPage> {
       _formKey.currentState.save();
       try{
         UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Vinayak(user: user)
-            ));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Vinayak(user: user),
+
+            )
+            //Navigator.pop(context);
+        );
       }catch(e){
         print(e.message);
+        return(e.message);
+
       }
     }
   }

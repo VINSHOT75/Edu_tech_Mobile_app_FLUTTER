@@ -6,6 +6,7 @@ import 'package:kommunicate_flutter_plugin/kommunicate_flutter_plugin.dart';
 
 import 'CollegeScreen.dart';
 import 'DeptScreen.dart';
+import 'Fee.dart';
 import 'NotesScreen.dart';
 import 'Signin.dart';
 
@@ -14,9 +15,7 @@ class Vinayak extends StatelessWidget {
   final UserCredential user ;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Bottom(),
-      );
+    return Bottom();
   }
 }
 class Bottom extends StatefulWidget {
@@ -27,6 +26,8 @@ enum OptionMenu { logout }
 
 
 class _BottomState extends State<Bottom> {
+  Color mainColor = Color(0xff305049);
+  Color secColor = Color(0xffD0BEA5);
   FirebaseAuth auth = FirebaseAuth.instance;
   Future <void>LogOut() async {
     FirebaseUser user = auth.signOut() as FirebaseUser;
@@ -35,8 +36,9 @@ class _BottomState extends State<Bottom> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    //initPlatformState();
   }
+
   Future<dynamic> initPlatformState() async {
     String platformVersion;
     try {
@@ -52,9 +54,9 @@ class _BottomState extends State<Bottom> {
   }
   Future<dynamic> openSupportChat() async {
     try {
-      dynamic convObject = {'appId': '308fc23638788a828c664ccca85a2a27a'};
+      dynamic conObject = {'appId': '308fc23638788a828c664ccca85a2a27a'};
       dynamic result =
-      await KommunicateFlutterPlugin.buildConversation(convObject);
+      await KommunicateFlutterPlugin.buildConversation(conObject);
 
       dynamic chatContext = {
         'key': 'value',
@@ -64,12 +66,12 @@ class _BottomState extends State<Bottom> {
       try {
         dynamic kmUser = {
           'metadata': {
-            'Platform': 'Flutter 1',
-            'OS': 'Android',
-            'Version': '10.3'
+            // 'Platform': 'Flutter',
+            // 'OS': 'Android',
+            // 'Version': '10.3'
           }
         };
-        KommunicateFlutterPlugin.updateUserDetail(kmUser);
+        //KommunicateFlutterPlugin.updateUserDetail(kmUser);
       } on Exception catch (e) {
         print("Error while updating user details : " + e.toString());
       }
@@ -92,40 +94,54 @@ class _BottomState extends State<Bottom> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.black26,
       drawer : Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+              // child: Text('App Drawer'
+              //
+              // ),
               decoration: BoxDecoration(
-                color: Colors.deepOrangeAccent,
+                color: mainColor,
               ),
             ),
 
+            //Padding(
+             // padding: const EdgeInsets.only(top:40.0),
+              Container(
+                child: ListTile(
+                  title: Text('TracIT',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    openSupportChat();
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+              ),
             ListTile(
-              title: Text('TracIT'),
+              title: Text('Calendar',
+
+                  style: TextStyle(fontSize: 20),),
               onTap: () {
-                openSupportChat();
-                // Update the state of the app.
-                // ...
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>Calendar()));
               },
             ),
             ListTile(
-              title: Text('Calendar'),
+              title: Text('Fee Structure',
+                style: TextStyle(fontSize: 20),),
               onTap: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>FeeStr()));
               },
             ),
             ListTile(
-              title: Text('Fees'),
-              onTap: () {
-              },
-            ),
-            ListTile(
-              title: Text('Log out'),
+              title: Text('Log out',
+                style: TextStyle(fontSize: 20),),
               onTap: () {
                 LogOut();
+                //Navigator.pop(context);
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LoginPage()));
               },
             ),
@@ -133,23 +149,29 @@ class _BottomState extends State<Bottom> {
         ),
       ),
 
-        appBar: AppBar(
-          backgroundColor: Colors.deepOrangeAccent,
-             title : Center(
-                 child: Text(
-                 'TRACIT          '
+      appBar: AppBar(
+        // leading: IconButton (icon:Icon(Icons.arrow_back_ios
+        // ),
+        //   onPressed:() {
+        //     Navigator.pop(context);
+        //   },
+        // ),
+        backgroundColor: mainColor,
+        title : Center(
+          child: Text(
+              'TRACIT          '
           ),
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        buttonBackgroundColor: Colors.deepOrangeAccent,
+        buttonBackgroundColor: secColor,
         index: 0 ,
         items: <Widget>[
           Icon(Icons.business, size: 30),
           Icon(Icons.supervised_user_circle, size: 30),
           Icon(Icons.business, size: 30),
         ],
-        color: Colors.deepOrangeAccent,
+        color: mainColor,
         backgroundColor: Colors.white,
         onTap: (index) {
           setState(() {
@@ -158,7 +180,7 @@ class _BottomState extends State<Bottom> {
         },
       ),
 
-      body: screens[_page],
+    body: screens[_page],
     );
   }
 }

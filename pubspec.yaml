@@ -12,7 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^0.18.0+1
+  firebase_auth: ^0.18.3
   firebase_core: ^0.5.0
   curved_navigation_bar: ^0.3.4
   kommunicate_flutter_plugin: ^1.0.9

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:testing3/MyAttendance.dart';
 import 'package:testing3/MySubjects.dart';
 
@@ -11,30 +10,40 @@ enum OptionMenu { logout }
 
 class _DepartState extends State<Depart> {
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
           body: ListView(
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.map),
                 onTap:(){
+                  //Navigator.pop(context);
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder:
-                          (BuildContext context)=> MySubjects()));
+                          (BuildContext abc)=> MySubjects()
+                      )
+                  );
                 } ,
-                title: Text('My Subjects'),
+                title: Text('My Subjects',
+                style: TextStyle(fontSize: 18),),
               ),
               ListTile(
                 leading: Icon(Icons.photo_album),
                 onTap: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> MyAttendance()));
-
-                },
-                title: Text('My Attendance'),
+                  },
+                title: Text('Teachers info',
+                  style: TextStyle(fontSize: 18),),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 80.0),
+                child: Container(
+                  height: 380.0,
+                  width: 380.0, // fixed width and height
+                  child: Image.asset('images/teacher.gif'),
+                ),
               ),
             ],
           ),
-        )
     );
   }
 }
